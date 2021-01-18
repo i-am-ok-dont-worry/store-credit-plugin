@@ -43,6 +43,8 @@ module.exports = ({ config, db, router, cache, apiStatus, apiError, getRestApiCl
      * @req.query.sort - Sort by
      * @req.query.sortDir {asc|desc} - Sort direction
      * @req.query.start - Page number
+     * @req.query.token
+     * @req.query.storeCode
      */
     router.get('/:customerId', (req, res) => {
         const { customerId } = req.params;
@@ -60,6 +62,8 @@ module.exports = ({ config, db, router, cache, apiStatus, apiError, getRestApiCl
     /**
      * Returns list of store credits
      * @req.param.storeCreditId Store credit id
+     * @req.query.token
+     * @req.query.storeCode
      */
     router.get('/single/:storeCreditId', (req, res) => {
         const { storeCreditId } = req.params;
