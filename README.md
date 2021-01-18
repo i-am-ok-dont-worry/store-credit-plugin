@@ -2,6 +2,8 @@
 Provides registered customers with a flexible credit system. 
 Lets customers spend their credit balance on product purchase.
 
+Plugin is compatible with [Amasty Store Credit Magento Extension](https://amasty.com/store-credit-and-refund-for-magento-2.html)
+
 ## API
 Plugin exposes 2 endpoints to handle order return:
 * `GET /vendor/store-credit/{{customerId}}` - returns list of customer store credits
