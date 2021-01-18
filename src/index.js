@@ -98,7 +98,7 @@ module.exports = ({ config, db, router, cache, apiStatus, apiError, getRestApiCl
     });
 
     /**
-     * Applies amount of user store credit to the cart
+     * Cancels user store credit on the cart
      * @req.query.cartId
      * @req.query.token
      * @req.query.storeCode
