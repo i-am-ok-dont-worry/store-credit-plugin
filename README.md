@@ -5,7 +5,7 @@ Lets customers spend their credit balance on product purchase.
 Plugin is compatible with [Amasty Store Credit Magento Extension](https://amasty.com/store-credit-and-refund-for-magento-2.html)
 
 ## API
-Plugin exposes 4 endpoints to handle order return:
+Plugin exposes 4 endpoints to customer credit:
 * `GET /vendor/store-credit/{{customerId}}` - returns list of customer store credits
 * `GET /vendor/store-credit/single/{{storeCreditId}}` - returns single store credit
 * `POST /vendor/store-credit/apply?amount={{amount}}&cartId={{cartId}}&token={{token}}&storeCode={{storeCode}}` - applies credit to the cart 
