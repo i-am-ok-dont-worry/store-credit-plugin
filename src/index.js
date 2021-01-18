@@ -21,6 +21,16 @@ module.exports = ({ config, db, router, cache, apiStatus, apiError, getRestApiCl
                 return restClient.get(url, token);
             };
 
+            module.applyCredit = (amount, token) => {
+                const url = `/carts/mine/amstorecredit/apply`;
+                return restClient.post(url, token);
+            };
+
+            module.cancelCredit = (token) => {
+                const url = `/carts/mine/amstorecredit/cancel`;
+                return restClient.post(url, token);
+            };
+
             return module;
         });
 
@@ -57,6 +67,41 @@ module.exports = ({ config, db, router, cache, apiStatus, apiError, getRestApiCl
         const client = createMage2RestClient();
         try {
             client.storeCredit.getSingleStoreCredit(storeCreditId, token)
+                .then(response => apiStatus(res, response, 200))
+                .catch(err => apiError(res, err));
+        } catch (e) {
+            apiError(res, e);
+        }
+    });
+
+    /**
+     * Applies amount of user store credit to the cart
+     * @req.query.amount
+     * @req.query.token
+     * @req.query.storeCode
+     */
+    router.post('/apply', (req, res) => {
+        const { token, amount } = req.query;
+        const client = createMage2RestClient();
+        try {
+            client.storeCredit.applyCredit(amount, token)
+                .then(response => apiStatus(res, response, 200))
+                .catch(err => apiError(res, err));
+        } catch (e) {
+            apiError(res, e);
+        }
+    });
+
+    /**
+     * Applies amount of user store credit to the cart
+     * @req.query.token
+     * @req.query.storeCode
+     */
+    router.post('/cancel', (req, res) => {
+        const { token } = req.query;
+        const client = createMage2RestClient();
+        try {
+            client.storeCredit.cancelCredit(token)
                 .then(response => apiStatus(res, response, 200))
                 .catch(err => apiError(res, err));
         } catch (e) {
