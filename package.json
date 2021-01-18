@@ -1,9 +1,9 @@
 {
-  "name": "vsf-api-plugin-template",
-  "pluginname": "VSF api plugin",
+  "name": "store-credit-plugin",
+  "pluginname": "store-credit-plugin",
   "companyname": "",
   "version": "1.0.0",
-  "description": "Template for VSF api plugin",
+  "description": "Plugin for Amasty store credit",
   "main": "src/index.js",
   "scripts": {
     "test": "test",
