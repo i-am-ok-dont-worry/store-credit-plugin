@@ -9,9 +9,10 @@ module.exports = ({ config, db, router, cache, apiStatus, apiError, getRestApiCl
                 const url = `/kmk-amastystorecredit/storecredit/search`;
                 const query = new SearchCriteria();
                 query.applyFilter('customer_id', customerId);
-                query.applySort(sort, sortDir);
-                query.setCurrentPage(start);
+                query.applySort(sortBy, sortDir);
+                query.setCurrentPage(currentPage);
                 query.setPageSize(pageSize);
+
                 return restClient.get(url + '?' + query.build(), token);
             };
 
@@ -35,7 +36,7 @@ module.exports = ({ config, db, router, cache, apiStatus, apiError, getRestApiCl
      */
     router.get('/:customerId', (req, res) => {
         const { customerId } = req.params;
-        const { token, ...restParams } = req.query;
+        const { token, storeCode, ...restParams } = req.query;
         const client = createMage2RestClient();
         try {
             client.storeCredit.getStoreCredit({ customerId, restParams }, token)
