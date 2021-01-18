@@ -1,7 +1,7 @@
 {
   "name": "store-credit-plugin",
   "pluginname": "store-credit-plugin",
-  "companyname": "",
+  "companyname": "grupakmk",
   "version": "1.0.0",
   "description": "Plugin for Amasty store credit",
   "main": "src/index.js",
