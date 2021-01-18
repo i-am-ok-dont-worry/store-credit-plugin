@@ -21,14 +21,14 @@ module.exports = ({ config, db, router, cache, apiStatus, apiError, getRestApiCl
                 return restClient.get(url, token);
             };
 
-            module.applyCredit = (amount, token) => {
+            module.applyCredit = (amount, cartId, token) => {
                 const url = `/carts/mine/amstorecredit/apply`;
-                return restClient.post(url, token);
+                return restClient.post(url, { amount, cartId }, token);
             };
 
-            module.cancelCredit = (token) => {
+            module.cancelCredit = (cartId, token) => {
                 const url = `/carts/mine/amstorecredit/cancel`;
-                return restClient.post(url, token);
+                return restClient.post(url, { cartId }, token);
             };
 
             return module;
@@ -81,14 +81,15 @@ module.exports = ({ config, db, router, cache, apiStatus, apiError, getRestApiCl
     /**
      * Applies amount of user store credit to the cart
      * @req.query.amount
+     * @req.query.cartId
      * @req.query.token
      * @req.query.storeCode
      */
     router.post('/apply', (req, res) => {
-        const { token, amount } = req.query;
+        const { token, amount, cartId } = req.query;
         const client = createMage2RestClient();
         try {
-            client.storeCredit.applyCredit(amount, token)
+            client.storeCredit.applyCredit(amount, cartId, token)
                 .then(response => apiStatus(res, response, 200))
                 .catch(err => apiError(res, err));
         } catch (e) {
@@ -98,14 +99,15 @@ module.exports = ({ config, db, router, cache, apiStatus, apiError, getRestApiCl
 
     /**
      * Applies amount of user store credit to the cart
+     * @req.query.cartId
      * @req.query.token
      * @req.query.storeCode
      */
     router.post('/cancel', (req, res) => {
-        const { token } = req.query;
+        const { token, cartId } = req.query;
         const client = createMage2RestClient();
         try {
-            client.storeCredit.cancelCredit(token)
+            client.storeCredit.cancelCredit(cartId, token)
                 .then(response => apiStatus(res, response, 200))
                 .catch(err => apiError(res, err));
         } catch (e) {
