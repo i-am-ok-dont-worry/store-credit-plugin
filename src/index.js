@@ -31,11 +31,33 @@ module.exports = ({ config, db, router, cache, apiStatus, apiError, getRestApiCl
                 return restClient.post(url, { cartId }, token);
             };
 
+            module.myStoreCredit = (token) => {
+                const url = `/customers/me/amstorecredit`;
+                return restClient.get(url, token);
+            };
+
             return module;
         });
 
         return client;
     };
+
+    /**
+     * Returns details about the customer credit
+     * @req.query.token
+     * @req.query.storeCode
+     */
+    router.get('/mine', (req, res) => {
+        const { token } = req.query;
+        const client = createMage2RestClient();
+        try {
+            client.storeCredit.myStoreCredit(token)
+                .then(response => apiStatus(res, response, 200))
+                .catch(err => apiError(res, err));
+        } catch (e) {
+            apiError(res, e);
+        }
+    });
 
     /**
      * Returns list of store credits per customer
